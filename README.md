@@ -10,14 +10,15 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 5
+* Arthur Ribeiro Dias Guimarães
+* Davi Chavante Carlos
+* João Pedro Silva de Oliveira
+* Maria Eduarda Borges
+* Maria Laura Cardoso Bastos
+* Viviane Aparecida Campos de Oliveira Pertence
 
 ## Orientador
 
-* Nome completo do professor 1
+* Alexandre Teixeira
 
 
