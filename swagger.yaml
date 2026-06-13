@@ -1,0 +1,325 @@
+openapi: 3.0.0
+info:
+  title: ITM API
+  version: 1.0.0
+  description: >
+    API REST do Instituto Tecnológico Mineiro — CRUD de Equipamentos,
+    Endereçamento IP e Links de Dados das unidades Sede, Campus Norte e Campus Sul.
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Equipamentos
+    description: Inventário de ativos de TI por unidade
+  - name: Endereçamento IP
+    description: Sub-redes, gateways e faixas de IP da infraestrutura
+  - name: Links de Dados
+    description: Dimensionamento de links por aplicação e unidade
+
+paths:
+  # ============================================================
+  # EQUIPAMENTOS
+  # ============================================================
+  /api/equipamentos:
+    get:
+      tags: [Equipamentos]
+      summary: Lista todos os equipamentos
+      parameters:
+        - in: query
+          name: unidade
+          schema:
+            type: string
+            enum: [Sede, Campus Norte, Campus Sul]
+          description: Filtra equipamentos por unidade
+      responses:
+        '200':
+          description: Lista de equipamentos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipamento'
+    post:
+      tags: [Equipamentos]
+      summary: Cadastra um novo equipamento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipamentoInput'
+      responses:
+        '201':
+          description: Equipamento criado
+        '400':
+          description: Dados inválidos
+
+  /api/equipamentos/{id}:
+    get:
+      tags: [Equipamentos]
+      summary: Busca equipamento por ID
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Equipamento encontrado
+        '404':
+          description: Equipamento não encontrado
+    put:
+      tags: [Equipamentos]
+      summary: Atualiza um equipamento
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipamentoInput'
+      responses:
+        '200':
+          description: Equipamento atualizado
+        '404':
+          description: Equipamento não encontrado
+    delete:
+      tags: [Equipamentos]
+      summary: Remove um equipamento
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Equipamento removido
+        '404':
+          description: Equipamento não encontrado
+
+  # ============================================================
+  # ENDEREÇOS IP
+  # ============================================================
+  /api/enderecos-ip:
+    get:
+      tags: [Endereçamento IP]
+      summary: Lista todos os endereçamentos IP
+      responses:
+        '200':
+          description: Lista de endereços IP
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnderecoIp'
+    post:
+      tags: [Endereçamento IP]
+      summary: Cadastra um novo endereçamento IP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnderecoIpInput'
+      responses:
+        '201':
+          description: Endereço IP criado
+        '400':
+          description: Dados inválidos
+
+  /api/enderecos-ip/{id}:
+    get:
+      tags: [Endereçamento IP]
+      summary: Busca endereçamento IP por ID
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Endereço IP encontrado
+        '404':
+          description: Endereço IP não encontrado
+    put:
+      tags: [Endereçamento IP]
+      summary: Atualiza um endereçamento IP
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnderecoIpInput'
+      responses:
+        '200':
+          description: Endereço IP atualizado
+        '404':
+          description: Endereço IP não encontrado
+    delete:
+      tags: [Endereçamento IP]
+      summary: Remove um endereçamento IP
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Endereço IP removido
+        '404':
+          description: Endereço IP não encontrado
+
+  # ============================================================
+  # LINKS DE DADOS
+  # ============================================================
+  /api/links:
+    get:
+      tags: [Links de Dados]
+      summary: Lista todos os links de dados
+      parameters:
+        - in: query
+          name: unidade
+          schema:
+            type: string
+            enum: [Sede, Campus Norte, Campus Sul]
+          description: Filtra links por unidade
+      responses:
+        '200':
+          description: Lista de links
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Link'
+    post:
+      tags: [Links de Dados]
+      summary: Cadastra um novo link de dados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkInput'
+      responses:
+        '201':
+          description: Link criado
+        '400':
+          description: Dados inválidos
+
+  /api/links/{id}:
+    get:
+      tags: [Links de Dados]
+      summary: Busca link por ID
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Link encontrado
+        '404':
+          description: Link não encontrado
+    put:
+      tags: [Links de Dados]
+      summary: Atualiza um link de dados
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkInput'
+      responses:
+        '200':
+          description: Link atualizado
+        '404':
+          description: Link não encontrado
+    delete:
+      tags: [Links de Dados]
+      summary: Remove um link de dados
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Link removido
+        '404':
+          description: Link não encontrado
+
+components:
+  parameters:
+    IdParam:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+
+  schemas:
+    Equipamento:
+      type: object
+      properties:
+        id: { type: integer, example: 1 }
+        unidade: { type: string, example: Sede }
+        tipo_ativo: { type: string, example: Switch }
+        modelo: { type: string, example: "Cisco Catalyst 2960 24 portas" }
+        fabricante: { type: string, example: Cisco }
+        setor: { type: string, example: Rede }
+        quantidade: { type: integer, example: 1 }
+        valor: { type: number, example: 2500.00 }
+        valor_total: { type: number, example: 2500.00 }
+        criado_em: { type: string, format: date-time }
+        atualizado_em: { type: string, format: date-time }
+
+    EquipamentoInput:
+      type: object
+      required: [unidade, tipo_ativo, modelo, fabricante, setor, quantidade, valor]
+      properties:
+        unidade:
+          type: string
+          enum: [Sede, Campus Norte, Campus Sul]
+          example: Sede
+        tipo_ativo: { type: string, example: Switch }
+        modelo: { type: string, example: "Cisco Catalyst 2960 24 portas" }
+        fabricante: { type: string, example: Cisco }
+        setor: { type: string, example: Rede }
+        quantidade: { type: integer, example: 1 }
+        valor: { type: number, example: 2500.00 }
+
+    EnderecoIp:
+      type: object
+      properties:
+        id: { type: integer, example: 1 }
+        nome: { type: string, example: "Sede (Admin)" }
+        endereco_ip: { type: string, example: "192.168.2.0/24" }
+        mascara: { type: string, example: "255.255.255.0" }
+        gateway: { type: string, example: "192.168.2.1", nullable: true }
+        faixa_ip: { type: string, example: "192.168.2.2 – 192.168.2.254" }
+        dhcp: { type: string, example: "srv-dhcp 192.168.1.4", nullable: true }
+        criado_em: { type: string, format: date-time }
+        atualizado_em: { type: string, format: date-time }
+
+    EnderecoIpInput:
+      type: object
+      required: [nome, endereco_ip, mascara, faixa_ip]
+      properties:
+        nome: { type: string, example: "Sede (Admin)" }
+        endereco_ip: { type: string, example: "192.168.2.0/24" }
+        mascara: { type: string, example: "255.255.255.0" }
+        gateway: { type: string, example: "192.168.2.1", nullable: true }
+        faixa_ip: { type: string, example: "192.168.2.2 – 192.168.2.254" }
+        dhcp: { type: string, example: "srv-dhcp 192.168.1.4", nullable: true }
+
+    Link:
+      type: object
+      properties:
+        id: { type: integer, example: 1 }
+        unidade: { type: string, example: Sede }
+        aplicacao: { type: string, example: Videoconferência }
+        requisito_kbps: { type: integer, example: 1800 }
+        quantidade: { type: integer, example: 4 }
+        total_kbps: { type: integer, example: 7200 }
+        criado_em: { type: string, format: date-time }
+        atualizado_em: { type: string, format: date-time }
+
+    LinkInput:
+      type: object
+      required: [unidade, aplicacao, requisito_kbps, quantidade]
+      properties:
+        unidade:
+          type: string
+          enum: [Sede, Campus Norte, Campus Sul]
+          example: Sede
+        aplicacao: { type: string, example: Videoconferência }
+        requisito_kbps: { type: integer, example: 1800 }
+        quantidade: { type: integer, example: 4 }
