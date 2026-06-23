@@ -277,3 +277,12 @@ A planilha de recursos representa estimativa de implantação real da infraestru
 Com base nos quantitativos definidos e nos valores médios estimados, o investimento total previsto para a implantação da infraestrutura de rede do ITM é de aproximadamente R$ 1.170.500,00 (um milhão, cento e setenta mil e quinhentos reais). 
 
 O montante apresentado contempla a aquisição de estações de trabalho, servidores, equipamentos de rede, racks e nobreaks, não incluindo custos com instalação, licenciamento de software, contratos de suporte técnico ou despesas operacionais recorrentes. 
+
+#### Figura 1 - Protótipo do Projeto
+
+<img width="1239" height="696" alt="image" src="https://github.com/user-attachments/assets/669a67d2-1643-4519-ae95-f151e42d96bb" />
+
+#### Planilha de Equipamentos
+[Planilha_Equipamentos_ITM_Cenario_Real.xlsx](https://github.com/user-attachments/files/29228349/Planilha_Equipamentos_ITM_Cenario_Real.xlsx)
+
+
